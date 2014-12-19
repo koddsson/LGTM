@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="http://fb.me/react-0.12.2.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script>
-      $(function() {
-        $.getJSON('data.json').always(function(data) { console.log(data); });
-      });
-    </script>
+    <!--<script src="http://fb.me/react-0.12.2.min.js"></script>-->
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <!-- This is how we include libraries now, welcome to the new age -->
+    <script src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
   </head>
   <body>
     <div id='app'></div>
+    <script type="text/jsx">
+      /*
+       * A list of images components.
+       */
+      var ImageList = React.createClass({
+        render: function() {
+          var images = this.props.images.map(function(image) {
+            return <img src={image.url} key={image.url} />;
+          });
+          return <div>{images}</div>;
+        }
+      });
+      /*
+       * The main app, responsible for getting data and distributing to
+       * sub-components.
+       */
+      var App = React.createClass({
+        getInitialState: function() {
+          return {images: []};
+        },
+        componentDidMount: function() {
+          $.getJSON('data.json').done(function(data) {
+            this.setState({images: data});
+          }.bind(this));
+        },
+        render: function() {
+          return <ImageList images={this.state.images} />;
+        }
+      });
+      React.render(
+        <App />, document.getElementById('app')
+      );
+      
+      /* Routing */ 
+      var random = function() { console.log("random"); };
+      Router({'/random': random}).init();
+    </script>
   </body>
 </html>
