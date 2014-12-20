@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>LGTM</title>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <script src="http://fb.me/react-0.12.2.min.js"></script>
@@ -15,6 +16,10 @@
     <!-- This is how we include libraries now, welcome to the new age -->
     <script src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
     <style>
+      .ActionGroup {
+        text-align: right;
+        padding: 0px 5px 15px 5px; 
+      }
       .Header {
         text-align: center;
       }
@@ -43,6 +48,19 @@
           return <div>{images}</div>;
         }
       });
+
+      var RandomButton = React.createClass({
+        redirect: function() {
+          window.location.replace('#/random');
+        },
+        render: function() {
+          return (
+            <div className='ActionGroup'>
+              <button onClick={this.redirect}>Random image</button>
+            </div>
+          );
+        }
+      });
       /*
        * The main app, responsible for getting data and distributing to
        * sub-components.
@@ -60,6 +78,7 @@
           return (
             <div>
               <h1 className='Header'>LGTM</h1>
+              <RandomButton />
               <ImageList images={this.state.images} />
             </div>
           );
@@ -70,7 +89,12 @@
       );
       
       /* Routing */ 
-      var random = function() { console.log("random"); };
+      var random = function() {
+        $.getJSON('data.json').done(function(data) {
+          var url = data[Math.floor(Math.random()*data.length)].url;
+          window.location.replace(url);
+        });
+      };
       Router({'/random': random}).init();
     </script>
   </body>
