@@ -15,9 +15,13 @@
     <!-- This is how we include libraries now, welcome to the new age -->
     <script src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
     <style>
+      .Header {
+        text-align: center;
+      }
       .Image {
         height: 100px;
         width: 100px;
+        padding: 0px 5px;
       }
     </style>
   </head>
@@ -31,7 +35,7 @@
         render: function() {
           var images = this.props.images.map(function(image) {
             return (
-              <a href={image.url} key={image.url}>
+              <a href={image.url} target="_blank" key={image.url}>
                 <img className='Image' src={image.url} />
               </a>
             );
