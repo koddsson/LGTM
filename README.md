@@ -19,3 +19,4 @@ Wishlist
 --------
 
 - [ ] A one-click browser extension to get a random LGTM from the collection.
+- [ ] A criteria for good LGTM images and remove all images that don't fulfill it.
