@@ -87,6 +87,9 @@
                 .replace('.jpg', 's.jpg');
               img.thumbnail += '?t=' + Date.now();
               return img;
+            }).map(function(img) {
+              img.url += '?noredirect';
+              return img;
             });
 
             this.setState({images: data});
