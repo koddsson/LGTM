@@ -1,6 +1,8 @@
 Looks Good To Me
 ================
 
+[**Please note that the website doesn't currently work**](https://github.com/koddsson/LGTM/issues/9)
+
 A collection of LGTM macro images since I don't like the ones on LGTM.in
 
 Check it out [here](http://koddsson.github.io/LGTM/).
